@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg" id="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">beau</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Product
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">How it Works</a></li>
+            <li><a class="dropdown-item" href="#">Integrations</a></li>
+            <li><a class="dropdown-item" href="#">Templates</a></li>
+            <li><a class="dropdown-item" href="#">No More Forms!</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Solutions
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Legal Industry</a></li>
+            <li><a class="dropdown-item" href="#">Agencies</a></li>
+            <li><a class="dropdown-item" href="#">Real Estate</a></li>
+            <li><a class="dropdown-item" href="#">Venture Capital </a></li>
+            <li><a class="dropdown-item" href="#">Healthcare</a></li>
+            <li><a class="dropdown-item" href="#">Startups</a></li>
+            <li><a class="dropdown-item" href="#">Accounting</a></li>
+            <li><a class="dropdown-item" href="#">Human Resources</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Resources
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">About us</a></li>
+            <li><a class="dropdown-item" href="#">Help Center</a></li>
+            <li><a class="dropdown-item" href="#">Careers </a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/event" routerLinkActive="active bold"
+            >Event</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            *ngIf="!_authService.loggedIn()"
+            routerLink="/login"
+            routerLinkActive="active bold"
+            >Login</a
+          >
+        </li>
+      </ul>
+      <a
+        class="nav-link"
+        *ngIf="!_authService.loggedIn()"
+        routerLink="/signup"
+        routerLinkActive="active bold"
+        >Start a trial</a
+      >
+
+      <a
+        class="nav-link"
+        *ngIf="_authService.loggedIn()"
+        style="cursor: pointer"
+        color="black"
+        (click)="_authService.logoutUser()"
+        >LogOut</a
+      >
+    </div>
+  </div>
+</nav>
