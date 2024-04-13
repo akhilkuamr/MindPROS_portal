@@ -1,0 +1,145 @@
+<div class="col-sm-6" style="text-align: center">
+  <h1 style="color: #2d3091; font-family: Bablyon">Admin Service's</h1>
+  <select class="form-control" [(ngModel)]="selectedFilter">
+    <option [value]="undefined" selected>-- Choose and option --</option>
+    <option *ngFor="let type of filterTypes" [value]="type.value">
+      {{ type.display }}
+    </option>
+  </select>
+</div>
+<hr />
+
+<div [hidden]="selectedFilter !== 'terminated'">
+  <div class="col-xl-12 order-xl-1">
+    <div class="card bg-secondary shadow">
+      <div class="card-body">
+        <div class="main-panel">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div style="text-align: center">
+                    <h1 style="color: #2d3091; font-family: Bablyon">
+                      Skill Matrix
+                    </h1>
+                  </div>
+                  <div class="row g-3" style="padding-left: 200px">
+                    <div class="col-md">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          [(ngModel)]="newEmployee.skill_name"
+                          id="skill_name"
+                          name="skill_name"
+                        />
+
+                        <label for="floatingInputGrid">Skill Name</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          [(ngModel)]="newEmployee.description"
+                          id="description"
+                          name="description"
+                        />
+                        <label for="floatingInputGrid">description</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="addEmployee()"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row g-3" style="text-align: center">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Skill_name</th>
+                          <th scope="col">Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let employee of data2">
+                          <td scope="row">{{ employee.id }}</td>
+                          <td>{{ employee.skill_name }}</td>
+                          <td>{{ employee.description }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="selectedFilter !== 'release'">
+  <div class="col-xl-12 order-xl-1">
+    <div class="card bg-secondary shadow">
+      <div class="card-body">
+        <div class="main-panel">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <h1
+                    style="
+                      color: #2d3091;
+                      font-family: Bablyon;
+                      text-align: center;
+                    "
+                  >
+                    Menu management
+                  </h1>
+                  <div style="font-family: Bablyon">
+                    <ul *ngFor="let data of roles">
+                      <li>
+                        <input type="checkbox" />{{ data.role_name }}
+                        <ul *ngFor="let data1 of menus; let i = index">
+                          <li>
+                            <input
+                              type="checkbox"
+                              (change)="
+                                onChange(data1.menu_name + ' ' + data.role_name)
+                              "
+                              value="{{ data1.menu_name }}  {{
+                                data.role_name
+                              }}"
+                            />{{ data1.menu_name }}
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="displayData()"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

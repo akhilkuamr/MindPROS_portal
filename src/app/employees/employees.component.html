@@ -1,0 +1,39 @@
+<div class="col-xl-12 order-xl-1">
+  <div class="card bg-secondary shadow">
+    <div class="card-body">
+      <div class="main-panel">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div style="text-align: center">
+                  <h1 style="color: #2d3091; font-family: Bablyon">
+                    Employee Details
+                  </h1>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Employee_Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let foo of data">
+                        <th scope="row">1</th>
+                        <td>{{ foo.First_name }}</td>
+                        <td>{{ foo.Role }}</td>
+                        <td>{{ foo.Email }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

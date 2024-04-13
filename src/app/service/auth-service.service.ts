@@ -9,6 +9,7 @@ export class AuthServiceService {
   private _loginUrl = 'http://localhost:3000/login';
   private tokenKey = 'token';
   private baseUrl = 'http://localhost:3000/fetch';
+
   constructor(private http: HttpClient, private _router: Router) {}
 
   loginUser(user: any) {
@@ -16,15 +17,14 @@ export class AuthServiceService {
   }
 
   getDataByUsername(username: string): Observable<any> {
-    // Include username as a query parameter in the URL
-    return this.http.get(`${this.baseUrl}?username=${username}`);
+    const url = `${this.baseUrl}?username=${username}`;
+    return this.http.get(url);
   }
 
   loggedIn() {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token');
     } else {
-      // Handle the case where localStorage is not defined
       return false;
     }
   }
@@ -43,7 +43,14 @@ export class AuthServiceService {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('token');
     } else {
-      // Handle the case where localStorage is not defined
+      return false;
+    }
+  }
+
+  getToken1() {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('user');
+    } else {
       return false;
     }
   }
@@ -52,7 +59,6 @@ export class AuthServiceService {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(this.tokenKey, token);
     } else {
-      // Handle the case where localStorage is not defined
       alert('localStorage is not defined.');
     }
   }
@@ -61,7 +67,6 @@ export class AuthServiceService {
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem(this.tokenKey);
     } else {
-      // Handle the case where localStorage is not defined
       console.error('localStorage is not defined.');
     }
   }

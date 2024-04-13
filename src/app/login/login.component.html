@@ -11,10 +11,14 @@
   <div class="container login-container">
     <div class="row">
       <div class="col-md-6 ads">
-        <h1><span id="fl">Company</span></h1>
+        <h1><span id="fl">MindPROS</span></h1>
+        <!-- <img
+          style="width: 200px"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxtE_pUZlcuSYZny5awQEzBXs1WEKl9DvTZ32S2unCHQ&s"
+        /> -->
       </div>
       <div class="col-md-6 login-form">
-        <h3>Login Form</h3>
+        <h3>Employee Area</h3>
         <form>
           <div class="form-group">
             <input
@@ -62,6 +66,9 @@
             <span
               >Don't have an account? <a routerLink="/signup">signUp</a></span
             >
+          </div>
+          <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{ errorMessage }}
           </div>
         </form>
       </div>

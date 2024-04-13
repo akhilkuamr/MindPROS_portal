@@ -1,43 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthServicePaychexService } from './auth-service-paychex.service';
-import { Router } from '@angular/router';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-paychex',
   templateUrl: './paychex.component.html',
-  styleUrls: ['./paychex.component.css'],
+  styleUrl: './paychex.component.css',
 })
-export class PaychexComponent implements OnInit {
-  constructor(
-    public _authpaychex: AuthServicePaychexService,
-    private router: Router
-  ) {}
+export class PaychexComponent {
+  link: any = 'https://myapps.paychex.com/landing_remote/login.do?lang=en';
+  constructor(private elementRef: ElementRef) {}
 
-  loginUserData: any = {};
-  rememberMe: boolean = false;
-
-  ngOnInit(): void {
-    // Initialization code here if needed
-  }
-
-  loginUser(): void {
-    try {
-      this._authpaychex.loginUser(this.loginUserData).subscribe((res: any) => {
-        console.log(res);
-        const _authpaychex = res.token;
-        this._authpaychex.setToken(_authpaychex);
-
-        if (this.rememberMe && typeof localStorage !== 'undefined') {
-          localStorage.setItem('token1', _authpaychex);
-        } else if (typeof localStorage !== 'undefined') {
-          localStorage.removeItem('token1');
-        }
-
-        //this.router.navigate(['dashboard/paychex/paychexdashboard']);
-      });
-    } catch (error) {
-      console.error(error);
-      // Handle error (e.g., show an error message to the user)
-    }
+  openLinkInContainer(event: Event, container: HTMLDivElement): void {
+    event.preventDefault();
+    const link = (event.target as HTMLAnchorElement).href;
+    container.innerHTML = `<iframe src="${link}" width="1100px" height="800px"></iframe>`;
   }
 }

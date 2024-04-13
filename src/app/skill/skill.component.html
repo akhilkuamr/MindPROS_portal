@@ -1,0 +1,95 @@
+<div class="col-xl-12 order-xl-1">
+  <div class="card bg-secondary shadow">
+    <div class="card-body">
+      <div class="main-panel">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-body">
+                  <div style="text-align: center">
+                    <h1 style="color: #2d3091; font-family: Bablyon">
+                      Skill Matrix
+                    </h1>
+                  </div>
+                  <div class="row g-3" style="padding-left: 200px">
+                    <div class="col-md">
+                      <div class="form-floating">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example "
+                          [(ngModel)]="newEmployee.skill_name"
+                        >
+                          <option selected *ngFor="let foo of data">
+                            {{ foo.skill_name }}
+                          </option>
+                        </select>
+                        <label for="floatingInputGrid">Skill Name</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          [(ngModel)]="newEmployee.YOE"
+                          id="YOE"
+                          name="YOE"
+                        />
+                        <label for="floatingInputGrid">YOE</label>
+                      </div>
+                    </div>
+                    <div class="col-md">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          [(ngModel)]="newEmployee.rating"
+                          id="rating"
+                          name="rating"
+                        />
+                        <label for="floatingInputGrid">Rating</label>
+                      </div>
+                    </div>
+
+                    <div class="col-md">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="addEmployee()"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </div>
+
+                  <div>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col">Id</th>
+                          <th scope="col">Skill_name</th>
+                          <th scope="col">Year Of Expernice</th>
+                          <th scope="col">Rating</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let employee of data2">
+                          <td scope="row">{{ employee.id }}</td>
+                          <td>{{ employee.skill_name }}</td>
+                          <td>{{ employee.YOE }}</td>
+                          <td>{{ employee.rating }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
