@@ -3,86 +3,70 @@
     <div class="card-body">
       <div class="main-panel">
         <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="container">
-                  <div style="text-align: center">
-                    <h1 style="color: #2d3091; font-family: Bablyon">
-                      Immigration Documents
-                    </h1>
-                  </div>
-                  <div class="">
-                    <form>
-                      <!--  <div class="col-md-6">
-        <label for="formFile" class="form-label">Passport Number</label>
-        <input
-          class="form-control"
-          type="file"
-          name="image"
-          id="formFile"
-          (change)="selectImage($event)"
-        />
-      </div> -->
-
-                      <div class="col-md-6">
-                        <label for="formFile" class="form-label"
-                          >Passport Details *</label
-                        >
-                        <input
-                          class="form-control"
-                          type="file"
-                          (change)="selectImage($event)"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <label for="formFile" class="form-label"
-                          >Driving License *</label
-                        >
-                        <input
-                          class="form-control"
-                          type="file"
-                          (change)="selectImage($event)"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <label for="formFile" class="form-label"
-                          >Proof of Address *</label
-                        >
-                        <input
-                          class="form-control"
-                          type="file"
-                          (change)="selectImage($event)"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <label for="formFile" class="form-label">
-                          H1B Documents *</label
-                        >
-                        <input
-                          class="form-control"
-                          type="file"
-                          (change)="selectImage($event)"
-                        />
-                      </div>
-                      <div class="col-md-6">
-                        <label for="formFile" class="form-label">
-                          Green Card</label
-                        >
-                        <input
-                          class="form-control"
-                          type="file"
-                          (change)="selectImage($event)"
-                        />
-                      </div>
-                      <br />
-                      <div>
-                        <button (click)="onSubmit()">Submit</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+          <div class="col-md-12">
+            <div class="container">
+              <div style="text-align: center">
+                <h1 style="color: #2d3091; font-family: Bablyon">
+                  Immigration Documents
+                </h1>
               </div>
+
+              <form>
+                <div class="col-md-6">
+                  <label for="formFile" class="form-label"
+                    >Passport Details *</label
+                  >
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="selectImage($event)"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="formFile" class="form-label"
+                    >Driving License *</label
+                  >
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="selectImage($event)"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="formFile" class="form-label"
+                    >Proof of Address *</label
+                  >
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="selectImage($event)"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="formFile" class="form-label">
+                    H1B Documents *</label
+                  >
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="selectImage($event)"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="formFile" class="form-label"> Green Card</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="selectImage($event)"
+                  />
+                </div>
+                <br />
+                <div style="text-align: center">
+                  <button class="btn btn-success" (click)="onSubmit()">
+                    Submit
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

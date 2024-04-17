@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { HttpClient } from '@angular/common/http';
-import { TreeviewItem } from 'ngx-treeview';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-skill-matrix',

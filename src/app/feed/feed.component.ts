@@ -11,6 +11,7 @@ export class FeedComponent implements OnInit {
   ngOnInit(): void {
     this.api.tcHeadlines().subscribe((result) => {
       this.topHeadlinesData = result.articles;
+      // console.log(this.topHeadlinesData);
     });
   }
 }
