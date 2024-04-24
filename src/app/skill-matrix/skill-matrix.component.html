@@ -110,17 +110,25 @@
                   <div style="font-family: Bablyon">
                     <ul *ngFor="let data of roles">
                       <li>
-                        <input type="checkbox" />{{ data.role_name }}
-                        <ul *ngFor="let data1 of menus; let i = index">
+                        <input
+                          type="checkbox"
+                          [(ngModel)]="data.mainChecked"
+                          (change)="mainCheckboxChanged(data, $event)"
+                        />{{ data.role_name }}
+                        <ul *ngFor="let data1 of menus">
                           <li>
                             <input
                               type="checkbox"
-                              (change)="
-                                onChange(data1.menu_name + ' ' + data.role_name)
+                              [checked]="
+                                isMenuAssigned(data.role_name, data1.menu_name)
                               "
-                              value="{{ data1.menu_name }}  {{
-                                data.role_name
-                              }}"
+                              (change)="
+                                onChange(
+                                  data1.menu_name + ' ' + data.role_name,
+                                  $event
+                                )
+                              "
+                              [value]="data1.menu_name + ' ' + data.role_name"
                             />{{ data1.menu_name }}
                           </li>
                         </ul>

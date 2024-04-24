@@ -263,7 +263,7 @@ export class PersonalInfoComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.counter = localStorage.getItem('user');
-      const sub = this.http
+      this.http
         .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
         .subscribe((res: any) => {
           this.data = res;

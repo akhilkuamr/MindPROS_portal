@@ -20,8 +20,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let foo of data">
-                        <th scope="row">1</th>
+                      <tr *ngFor="let foo of data; let i = index">
+                        <th scope="row">{{ i + 1 }}</th>
                         <td>{{ foo.First_name }}</td>
                         <td>{{ foo.Role }}</td>
                         <td>{{ foo.Email }}</td>

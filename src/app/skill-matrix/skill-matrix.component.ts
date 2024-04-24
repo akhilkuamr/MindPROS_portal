@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { HttpClient } from '@angular/common/http';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-skill-matrix',
@@ -67,34 +68,79 @@ export class SkillMatrixComponent implements OnInit {
       alert('already Exists skill');
     }
     this.newEmployee = { id: 0, skill_name: '', description: '' };
-    console.log(newEmployeeData);
+    //console.log(newEmployeeData);
   }
 
-  onChange(value: string): void {
-    if (this.all_selected_values.includes(value)) {
-      this.all_selected_values = this.all_selected_values.filter(
-        (item) => item !== value
-      );
+  onChange(value: string, event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      if (!this.all_selected_values.includes(value)) {
+        this.all_selected_values.push(value);
+      }
     } else {
-      this.all_selected_values.push(value);
+      // If the checkbox is unchecked, remove the value from the array
+      const index = this.all_selected_values.indexOf(value);
+      if (index !== -1) {
+        this.all_selected_values.splice(index, 1);
+      }
     }
+    //   if (element.indexOf('Admin') >= 0 && !this.arr1.includes(element)) {
+    //     this.arr1.push(element);
+    //   } else if (
+    //     element.indexOf('Employee') >= 0 &&
+    //     !this.arr2.includes(element)
+    //   ) {
+    //     this.arr2.push(element);
+    //   }
+    // });
+    this.updateSelectedArrays();
+  }
 
-    console.log(this.all_selected_values);
+  mainCheckboxChanged(role: any, event: any) {
+    role.display_menu.forEach((menu: any) => {
+      menu.checked = event.target.checked;
+    });
+    this.updateSelectedArrays();
+  }
+
+  isMenuAssigned(roleName: string, menuName: string): boolean {
+    const filter = this.roles.find((item: any) => item.role_name === roleName);
+    if (filter !== undefined) {
+      const result = filter.display_menu.includes(menuName);
+      return result;
+    } else {
+      return false;
+    }
+  }
+
+  private updateSelectedArrays(): void {
+    this.arr1 = [];
+    this.arr2 = [];
     this.all_selected_values.forEach((element) => {
-      if (element.indexOf('Admin') >= 0 && !this.arr1.includes(element)) {
+      if (element.includes('Admin') && !this.arr1.includes(element)) {
         this.arr1.push(element);
-        console.log('array1' + this.arr1);
-      } else if (
-        element.indexOf('Employer') >= 0 &&
-        !this.arr2.includes(element)
-      ) {
+      } else if (element.includes('Employee') && !this.arr2.includes(element)) {
         this.arr2.push(element);
-        console.log('array2' + this.arr2);
       }
     });
   }
 
   displayData() {
+    const role1: String = 'Admin';
+    const role2: String = 'Employee';
+    const modifiedData = this.arr1.map((item: String) =>
+      item.replace(' Admin', '')
+    );
+    const modifiedData1 = this.arr2.map((item: String) =>
+      item.replace(' Employee', '')
+    );
+    this.http
+      .post(`http://localhost:3000/update/roles?param1=${role1}`, modifiedData)
+      .subscribe((result: any) => {});
+    this.http
+      .post(`http://localhost:3000/update/roles?param1=${role2}`, modifiedData1)
+      .subscribe((result: any) => {});
+
     alert('Roles was updated particular user');
   }
 }
