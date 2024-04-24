@@ -45,14 +45,14 @@ export class LoginComponent implements OnInit {
     // console.log(error);
     // }
     //console.log('43');
-    this.http
-      .post('http://localhost:3000/login2', this.loginUserData)
-      .subscribe((res: any) => {
-        console.log(res);
-
-        localStorage.setItem('token', res.accessToken);
-        localStorage.setItem('user', this.loginUserData.Email);
-        this._router.navigate(['/dashboard']);
-      });
+    try {
+      this.http
+        .post('http://localhost:3000/login2', this.loginUserData)
+        .subscribe((res: any) => {
+          localStorage.setItem('token', res.accessToken);
+          localStorage.setItem('user', this.loginUserData.Email);
+          this._router.navigate(['/dashboard']);
+        });
+    } catch (err) {}
   }
 }

@@ -11,6 +11,7 @@ export class PersonalInfoComponent implements OnInit {
   data: any = {};
   counter: any;
   newEmployee: any = {};
+  today: Date = new Date();
 
   states: any = [
     {

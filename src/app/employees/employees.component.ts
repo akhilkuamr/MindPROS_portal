@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-employees',
@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class EmployeesComponent implements OnInit {
   data: any = [];
   constructor(private http: HttpClient) {}
+
   ngOnInit(): void {
     this.http
       .get('http://localhost:3000/customers')

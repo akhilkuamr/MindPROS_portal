@@ -24,16 +24,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CompanyEmailComponent } from './company-email/company-email.component';
 import { CompanyEmailDashboardComponent } from './company-email-dashboard/company-email-dashboard.component';
 import { AuthServicePaychexServices } from './company-email/auth-service-company-email';
-import { TeamsPageComponent } from './teams-page/teams-page.component';
-import { LinkedlnPageComponent } from './linkedln-page/linkedln-page.component';
-import { RssFeedComponent } from './rss-feed/rss-feed.component';
-import { SkypePageComponent } from './skype-page/skype-page.component';
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
-import { DemoSsoComponent } from './demo-sso/demo-sso.component';
 import { MSALSSOComponent } from './msal-sso/msal-sso.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
@@ -43,7 +38,6 @@ import {
 import { MSAL_INSTANCE, MsalService } from '@azure/msal-angular';
 import { FeedComponent } from './feed/feed.component';
 import { NewapiService } from './feed/newapi.service';
-import { SsoComponent } from './sso/sso.component';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { SkillMatrixComponent } from './skill-matrix/skill-matrix.component';
 import { ImmigrationDocumentsComponent } from './immigration-documents/immigration-documents.component';
@@ -59,7 +53,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup/login', component: LoginComponent },
   { path: 'feed', component: FeedComponent },
-  { path: 'sso', component: SsoComponent },
   { path: 'information', component: PersonalInfoComponent },
   { path: 'skillmatrix', component: SkillMatrixComponent },
   { path: 'companyemail', component: CompanyEmailDashboardComponent },
@@ -99,14 +92,8 @@ function MsalInstanceFactory(): IPublicClientApplication {
     DashboardComponent,
     CompanyEmailComponent,
     CompanyEmailDashboardComponent,
-    TeamsPageComponent,
-    LinkedlnPageComponent,
-    RssFeedComponent,
-    SkypePageComponent,
-    DemoSsoComponent,
     MSALSSOComponent,
     FeedComponent,
-    SsoComponent,
     PersonalInfoComponent,
     SkillMatrixComponent,
     ImmigrationDocumentsComponent,

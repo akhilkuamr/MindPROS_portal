@@ -83,11 +83,13 @@ export class SkillMatrixComponent implements OnInit {
     this.all_selected_values.forEach((element) => {
       if (element.indexOf('Admin') >= 0 && !this.arr1.includes(element)) {
         this.arr1.push(element);
+        console.log('array1' + this.arr1);
       } else if (
         element.indexOf('Employer') >= 0 &&
         !this.arr2.includes(element)
       ) {
         this.arr2.push(element);
+        console.log('array2' + this.arr2);
       }
     });
   }
