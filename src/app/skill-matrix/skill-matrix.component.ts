@@ -42,6 +42,19 @@ export class SkillMatrixComponent implements OnInit {
     this.http.get('http://localhost:3000/menu').subscribe((result: any) => {
       this.menus = result;
     });
+
+    this.roles.forEach((role: any) => {
+      role.display_menu.forEach((menu: any) => {
+        if (role.display_menu) {
+          const value = `${menu} ${role.role_name}`;
+          if (!this.all_selected_values.includes(value)) {
+            this.all_selected_values.push(value);
+            //console.log(this.all_selected_values, '52');
+          }
+        }
+      });
+    });
+    this.updateSelectedArrays();
   }
 
   addEmployee() {
@@ -78,7 +91,6 @@ export class SkillMatrixComponent implements OnInit {
         this.all_selected_values.push(value);
       }
     } else {
-      // If the checkbox is unchecked, remove the value from the array
       const index = this.all_selected_values.indexOf(value);
       if (index !== -1) {
         this.all_selected_values.splice(index, 1);
@@ -97,8 +109,10 @@ export class SkillMatrixComponent implements OnInit {
   }
 
   mainCheckboxChanged(role: any, event: any) {
+    const isChecked = event.target.checked;
+    const checkedMenus = role.display_menu.filter((menu: any) => menu.checked);
     role.display_menu.forEach((menu: any) => {
-      menu.checked = event.target.checked;
+      menu.checked = isChecked || checkedMenus.includes(menu);
     });
     this.updateSelectedArrays();
   }

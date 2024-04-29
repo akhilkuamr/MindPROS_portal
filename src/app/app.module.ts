@@ -36,7 +36,7 @@ import {
   PublicClientApplication,
 } from '@azure/msal-browser';
 import { MSAL_INSTANCE, MsalService } from '@azure/msal-angular';
-import { FeedComponent } from './feed/feed.component';
+import { FeedComponent, LimitWordsPipe } from './feed/feed.component';
 import { NewapiService } from './feed/newapi.service';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { SkillMatrixComponent } from './skill-matrix/skill-matrix.component';
@@ -46,7 +46,6 @@ import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { EmployeesComponent } from './employees/employees.component';
 import { PaychexComponent } from './paychex/paychex.component';
 
-//import * as bootstrap from 'bootstrap';
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   //{ path: '', component: MainPageComponent },
@@ -100,6 +99,7 @@ function MsalInstanceFactory(): IPublicClientApplication {
     SkillComponent,
     EmployeesComponent,
     PaychexComponent,
+    LimitWordsPipe,
   ],
   imports: [
     BrowserModule,

@@ -169,6 +169,7 @@
             </div>
           </div>
         </div>
+
         <div class="card-body">
           <div class="text-muted h7 mb-2">
             <i class="fa fa-clock-o"></i> {{ nd.publishedAt }}
@@ -183,7 +184,8 @@
           </a>
 
           <p class="card-text">
-            {{ nd.content }}
+            {{ nd.content | limitWords : 33 }}
+            <br />
             <a href="{{ nd.url }}" target="_blank">{{ nd.url }}</a>
           </p>
         </div>
