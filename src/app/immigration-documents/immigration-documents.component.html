@@ -21,6 +21,16 @@
                     type="file"
                     (change)="selectImage($event)"
                   />
+                  <ul *ngIf="fileUploaded">
+                    <li *ngFor="let file of uploadedFiles">
+                      <a
+                        [href]="'http://localhost:3000/images/' + file"
+                        (click)="navigateToNextWindow(file)"
+                        >{{ file }}</a
+                      >
+                    </li>
+                  </ul>
+                  <!-- <span *ngIf="fileUploaded">download file</span> -->
                 </div>
                 <div class="col-md-6">
                   <label for="formFile" class="form-label"

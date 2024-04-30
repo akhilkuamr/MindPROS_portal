@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -7,35 +8,63 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './immigration-documents.component.html',
   styleUrl: './immigration-documents.component.css',
 })
-export class ImmigrationDocumentsComponent {
-  file: any[] = [];
+export class ImmigrationDocumentsComponent implements OnInit {
+  filesToUpload: File[] = [];
+  fileUploaded: boolean = false;
+  uploadedFiles: any = [];
+  counter: any;
 
-  constructor(private http: HttpClient, private form: FormBuilder) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private http: HttpClient,
+    private form: FormBuilder
+  ) {}
 
-  selectImage(event: any) {
-    // console.log('coming from frontend', event);
-    // for (let i = 0; i < event.target.files.length; i++) {
-    //   console.log(event.target.files.length);
-    //   this.file.push(event.target.files[i]);
-    //   console.log('After push fil', this.file);
-    // }
-    // console.log(this.file);
-    this.file = event.target.files;
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.counter = localStorage.getItem('user');
+    }
+    // console.log(this.counter, '27');
+
+    this.getUploadedFiles();
   }
 
+  selectImage(event: any) {
+    this.filesToUpload.push(...event.target.files);
+    this.fileUploaded = true;
+    //console.log(this.filesToUpload, '35');
+  }
+
+  getUploadedFiles() {
+    this.http.get('http://localhost:3000/files').subscribe((files) => {
+      this.uploadedFiles = files;
+      //console.log(this.uploadedFiles);
+    });
+  }
+
+  navigateToNextWindow(filename: string) {
+    // Implement navigation logic here
+    console.log('Navigate to next window for file:', filename);
+  }
+
+  // downloadFile(filename: string[]) {
+  //   window.open(`http://localhost:3000/images/${filename}`, '_blank');
+  // }
+
   onSubmit() {
-    if (this.file && this.file.length > 0) {
-      const formData = new FormData();
+    const formData = new FormData();
+    this.filesToUpload.forEach((file) => {
+      formData.append('files', file, file.name);
+    });
+    this.http
+      .post<any>(
+        `http://localhost:3000/upload?param1=${this.counter}`,
+        formData
+      )
+      .subscribe((res) => {
+        console.log(res.filename);
+      });
 
-      for (let i = 0; i < this.file.length; i++) {
-        formData.append(`files`, this.file[i]);
-      }
-      console.log(formData);
-
-      this.http
-        .post<any>('http://localhost:3000/upload', formData)
-        .subscribe((res) => console.log(res));
-      alert('Files successfully uploaded.');
-    }
+    alert('Files successfully uploaded.');
   }
 }
