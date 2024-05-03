@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { HttpClient } from '@angular/common/http';
-import { __values } from 'tslib';
 
 @Component({
   selector: 'app-skill-matrix',
@@ -41,15 +40,17 @@ export class SkillMatrixComponent implements OnInit {
     });
     this.http.get('http://localhost:3000/menu').subscribe((result: any) => {
       this.menus = result;
+      this.onload();
     });
+  }
 
+  onload() {
     this.roles.forEach((role: any) => {
       role.display_menu.forEach((menu: any) => {
         if (role.display_menu) {
           const value = `${menu} ${role.role_name}`;
           if (!this.all_selected_values.includes(value)) {
             this.all_selected_values.push(value);
-            //console.log(this.all_selected_values, '52');
           }
         }
       });
@@ -96,24 +97,6 @@ export class SkillMatrixComponent implements OnInit {
         this.all_selected_values.splice(index, 1);
       }
     }
-    //   if (element.indexOf('Admin') >= 0 && !this.arr1.includes(element)) {
-    //     this.arr1.push(element);
-    //   } else if (
-    //     element.indexOf('Employee') >= 0 &&
-    //     !this.arr2.includes(element)
-    //   ) {
-    //     this.arr2.push(element);
-    //   }
-    // });
-    this.updateSelectedArrays();
-  }
-
-  mainCheckboxChanged(role: any, event: any) {
-    const isChecked = event.target.checked;
-    const checkedMenus = role.display_menu.filter((menu: any) => menu.checked);
-    role.display_menu.forEach((menu: any) => {
-      menu.checked = isChecked || checkedMenus.includes(menu);
-    });
     this.updateSelectedArrays();
   }
 
@@ -127,11 +110,11 @@ export class SkillMatrixComponent implements OnInit {
     }
   }
 
-  private updateSelectedArrays(): void {
+  updateSelectedArrays(): void {
     this.arr1 = [];
     this.arr2 = [];
     this.all_selected_values.forEach((element) => {
-      if (element.includes('Admin') && !this.arr1.includes(element)) {
+      if (element.includes(' Admin') && !this.arr1.includes(element)) {
         this.arr1.push(element);
       } else if (element.includes('Employee') && !this.arr2.includes(element)) {
         this.arr2.push(element);

@@ -43,7 +43,6 @@ export class ImmigrationDocumentsComponent implements OnInit {
   }
 
   navigateToNextWindow(filename: string) {
-    // Implement navigation logic here
     console.log('Navigate to next window for file:', filename);
   }
 

@@ -110,11 +110,7 @@
                   <div style="font-family: Bablyon">
                     <ul *ngFor="let data of roles">
                       <li>
-                        <input
-                          type="checkbox"
-                          [(ngModel)]="data.mainChecked"
-                          (change)="mainCheckboxChanged(data, $event)"
-                        />{{ data.role_name }}
+                        <input type="checkbox" />{{ data.role_name }}
                         <ul *ngFor="let data1 of menus">
                           <li>
                             <input
