@@ -24,11 +24,30 @@ export class LimitWordsPipe implements PipeTransform {
 })
 export class FeedComponent implements OnInit {
   topHeadlinesData: any = [];
+  newPostContent: any = [];
   constructor(private api: NewapiService) {}
   ngOnInit(): void {
     this.api.tcHeadlines().subscribe((result) => {
       this.topHeadlinesData = result.articles;
-      // console.log(this.topHeadlinesData);
     });
+  }
+
+  addnews() {
+    console.log(this.newPostContent);
+    if (
+      this.newPostContent.title.trim() !== '' &&
+      this.newPostContent.content.trim() !== ''
+    ) {
+      // Add the new post to the beginning of the news feed
+      this.topHeadlinesData.unshift({
+        author: 'You', // Set the author to 'You' or any desired value
+        publishedAt: new Date().toISOString(), // Set the current date and time
+        title: this.newPostContent.title, // Set a default title or customize as needed
+        content: this.newPostContent.content, // Use the new post content entered by the user
+      });
+
+      // Clear the new post content after adding the post
+      this.newPostContent = '';
+    }
   }
 }

@@ -20,7 +20,8 @@
                           aria-label="Default select example "
                           [(ngModel)]="newEmployee.skill_name"
                         >
-                          <option selected *ngFor="let foo of data">
+                          <option selected>--- Choose Skill ---</option>
+                          <option *ngFor="let foo of data">
                             {{ foo.skill_name }}
                           </option>
                         </select>

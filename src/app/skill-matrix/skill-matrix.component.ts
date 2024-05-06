@@ -1,6 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { HttpClient } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-skill-matrix',
@@ -30,16 +37,17 @@ export class SkillMatrixComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http
-      .get('http://localhost:3000/skillmatrix')
-      .subscribe((result: any) => {
-        this.data2 = result;
-      });
-    this.http.get('http://localhost:3000/roles').subscribe((result: any) => {
-      this.roles = result;
-    });
-    this.http.get('http://localhost:3000/menu').subscribe((result: any) => {
-      this.menus = result;
+    const sources = [
+      this.http.get('http://localhost:3000/skillmatrix'),
+      this.http.get('http://localhost:3000/roles'),
+      this.http.get('http://localhost:3000/menu'),
+    ];
+    forkJoin(sources).subscribe((res) => {
+      if (res) {
+        this.data2 = res[0];
+        this.roles = res[1];
+        this.menus = res[2];
+      }
       this.onload();
     });
   }
@@ -116,7 +124,11 @@ export class SkillMatrixComponent implements OnInit {
     this.all_selected_values.forEach((element) => {
       if (element.includes(' Admin') && !this.arr1.includes(element)) {
         this.arr1.push(element);
-      } else if (element.includes('Employee') && !this.arr2.includes(element)) {
+      } else if (
+        element.includes('Employee') &&
+        !this.arr2.includes(element) &&
+        !element.includes('undefined')
+      ) {
         this.arr2.push(element);
       }
     });

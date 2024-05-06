@@ -20,16 +20,14 @@
                     class="form-control"
                     type="file"
                     (change)="selectImage($event)"
+                    #fileUpload
                   />
-                  <ul *ngIf="fileUploaded">
-                    <li *ngFor="let file of uploadedFiles">
-                      <a
-                        [href]="'http://localhost:3000/images/' + file"
-                        (click)="navigateToNextWindow(file)"
-                        >{{ file }}</a
-                      >
-                    </li>
-                  </ul>
+                  <section [ngSwitch]="status" class="fileUpload">
+                    <p *ngSwitchCase="'uploading'">⏳ Uploading...</p>
+                    <p *ngSwitchCase="'success'">✅ Done!</p>
+                    <p *ngSwitchCase="'fail'">❌ Error!</p>
+                    <p *ngSwitchDefault>😶 Waiting to upload...</p>
+                  </section>
                 </div>
                 <div class="col-md-6">
                   <label for="formFile" class="form-label"

@@ -9,10 +9,12 @@ import { FormBuilder } from '@angular/forms';
   styleUrl: './immigration-documents.component.css',
 })
 export class ImmigrationDocumentsComponent implements OnInit {
+  status: 'initial' | 'uploading' | 'success' | 'fail' = 'initial'; // Variable to store file status
   filesToUpload: File[] = [];
   fileUploaded: boolean = false;
   uploadedFiles: any = [];
   counter: any;
+  fileName: any = [];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -24,31 +26,22 @@ export class ImmigrationDocumentsComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.counter = localStorage.getItem('user');
     }
-    // console.log(this.counter, '27');
-
     this.getUploadedFiles();
   }
 
   selectImage(event: any) {
+    this.status = 'uploading';
     this.filesToUpload.push(...event.target.files);
+    this.status = 'success';
+
     this.fileUploaded = true;
-    //console.log(this.filesToUpload, '35');
   }
 
   getUploadedFiles() {
     this.http.get('http://localhost:3000/files').subscribe((files) => {
       this.uploadedFiles = files;
-      //console.log(this.uploadedFiles);
     });
   }
-
-  navigateToNextWindow(filename: string) {
-    console.log('Navigate to next window for file:', filename);
-  }
-
-  // downloadFile(filename: string[]) {
-  //   window.open(`http://localhost:3000/images/${filename}`, '_blank');
-  // }
 
   onSubmit() {
     const formData = new FormData();
