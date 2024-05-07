@@ -47,10 +47,10 @@ import { EmployeesComponent } from './employees/employees.component';
 import { PaychexComponent } from './paychex/paychex.component';
 
 const routes: Routes = [
-  { path: 'signup', component: SignupComponent },
-  //{ path: '', component: MainPageComponent },
+  // { path: 'signup', component: SignupComponent },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'signup/login', component: LoginComponent },
+  //{ path: 'signup/login', component: LoginComponent },
   { path: 'feed', component: FeedComponent },
   { path: 'information', component: PersonalInfoComponent },
   { path: 'skillmatrix', component: SkillMatrixComponent },

@@ -1,8 +1,8 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { AuthServiceService } from '../service/auth-service.service';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,26 +15,22 @@ export class DashboardComponent implements OnInit {
   id_data: any; // storing session data
   counter: any; //getting from session stroage
   filteredData: any; //filtered roles data
-  constructor(
-    private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  constructor(private http: HttpClient, private _auth: AuthServiceService) {}
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.counter = localStorage.getItem('user');
-      this.http
-        .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
-        .subscribe((res: any) => {
-          this.id_data = res;
-        });
-    }
-    this.http
-      .get('http://localhost:3000/customers')
-      .subscribe((result: any) => {
-        this.data = result;
-      });
-    this.http.get('http://localhost:3000/roles').subscribe((result: any) => {
-      this.data1 = result;
+    this.counter = this._auth.getToken1();
+    const sources = [
+      this.http.get(`http://localhost:3000/fetchdata?param1=${this.counter}`),
+      this.http.get('http://localhost:3000/customers'),
+      this.http.get('http://localhost:3000/roles'),
+    ];
+
+    forkJoin(sources).subscribe((res) => {
+      console.log(res);
+      if (res) {
+        this.id_data = res[0];
+        this.data = res[1];
+        this.data1 = res[2];
+      }
       this.admin();
     });
   }

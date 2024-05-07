@@ -22,6 +22,7 @@ export class SkillMatrixComponent implements OnInit {
   arr1: any = [];
   arr2: any = [];
   all_selected_values: any[] = [];
+  errorMessage: string = 'Loading....';
   public filterTypes = [
     { value: 'release', display: 'Menu management' },
     { value: 'terminated', display: 'Skills' },
@@ -42,14 +43,19 @@ export class SkillMatrixComponent implements OnInit {
       this.http.get('http://localhost:3000/roles'),
       this.http.get('http://localhost:3000/menu'),
     ];
-    forkJoin(sources).subscribe((res) => {
-      if (res) {
-        this.data2 = res[0];
-        this.roles = res[1];
-        this.menus = res[2];
+    forkJoin(sources).subscribe(
+      (res) => {
+        if (res) {
+          this.data2 = res[0];
+          this.roles = res[1];
+          this.menus = res[2];
+        }
+        this.onload();
+      },
+      (error: any) => {
+        this.errorMessage = error.message;
       }
-      this.onload();
-    });
+    );
   }
 
   onload() {

@@ -11,8 +11,8 @@ export class LoginComponent implements OnInit {
   data: any = [];
   loginUserData: any = {};
   rememberMe: boolean = false;
-  errorMessage: string = '';
   user: any;
+  errorMessage: string = '';
   // counter: any;
   constructor(
     private _auth: AuthServiceService,
@@ -53,6 +53,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', this.loginUserData.Email);
           this._router.navigate(['/dashboard']);
         });
-    } catch (err) {}
+    } catch (err: any) {
+      console.log(err, '57');
+      this.errorMessage = err;
+    }
   }
 }

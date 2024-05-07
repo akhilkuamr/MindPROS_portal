@@ -25,11 +25,23 @@ export class LimitWordsPipe implements PipeTransform {
 export class FeedComponent implements OnInit {
   topHeadlinesData: any = [];
   newPostContent: any = [];
+  isPostsTabActive: boolean = true;
+  isImagesTabActive: boolean = false;
   constructor(private api: NewapiService) {}
   ngOnInit(): void {
     this.api.tcHeadlines().subscribe((result) => {
       this.topHeadlinesData = result.articles;
     });
+  }
+
+  handleTabClick(tab: string) {
+    if (tab === 'posts') {
+      this.isPostsTabActive = true;
+      this.isImagesTabActive = false;
+    } else if (tab === 'images') {
+      this.isPostsTabActive = false;
+      this.isImagesTabActive = true;
+    }
   }
 
   addnews() {
@@ -38,15 +50,13 @@ export class FeedComponent implements OnInit {
       this.newPostContent.title.trim() !== '' &&
       this.newPostContent.content.trim() !== ''
     ) {
-      // Add the new post to the beginning of the news feed
       this.topHeadlinesData.unshift({
-        author: 'You', // Set the author to 'You' or any desired value
-        publishedAt: new Date().toISOString(), // Set the current date and time
-        title: this.newPostContent.title, // Set a default title or customize as needed
-        content: this.newPostContent.content, // Use the new post content entered by the user
+        author: 'You',
+        publishedAt: new Date().toISOString(),
+        title: this.newPostContent.title,
+        content: this.newPostContent.content,
       });
 
-      // Clear the new post content after adding the post
       this.newPostContent = '';
     }
   }

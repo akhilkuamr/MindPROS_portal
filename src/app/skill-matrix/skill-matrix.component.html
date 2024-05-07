@@ -107,44 +107,53 @@
                   >
                     Menu management
                   </h1>
-                  <div style="font-family: Bablyon">
-                    <ul *ngFor="let data of roles">
-                      <div class="row">
-                        <li>
-                          <input type="checkbox" />{{ data.role_name }}
-                          <ul *ngFor="let data1 of menus">
-                            <li>
-                              <input
-                                class="form-check-input me-1"
-                                type="checkbox"
-                                [checked]="
-                                  isMenuAssigned(
-                                    data.role_name,
-                                    data1.menu_name
-                                  )
-                                "
-                                (change)="
-                                  onChange(
-                                    data1.menu_name + ' ' + data.role_name,
-                                    $event
-                                  )
-                                "
-                                [value]="data1.menu_name + ' ' + data.role_name"
-                              />{{ data1.menu_name }}
-                            </li>
-                          </ul>
-                        </li>
-                      </div>
-                    </ul>
-                  </div>
+                  <div *ngIf="roles.length > 0; else noroles">
+                    <div style="font-family: Bablyon">
+                      <ul *ngFor="let data of roles">
+                        <div class="row">
+                          <li>
+                            <input type="checkbox" />{{ data.role_name }}
+                            <ul *ngFor="let data1 of menus">
+                              <li>
+                                <input
+                                  class="form-check-input me-1"
+                                  type="checkbox"
+                                  [checked]="
+                                    isMenuAssigned(
+                                      data.role_name,
+                                      data1.menu_name
+                                    )
+                                  "
+                                  (change)="
+                                    onChange(
+                                      data1.menu_name + ' ' + data.role_name,
+                                      $event
+                                    )
+                                  "
+                                  [value]="
+                                    data1.menu_name + ' ' + data.role_name
+                                  "
+                                />{{ data1.menu_name }}
+                              </li>
+                            </ul>
+                          </li>
+                        </div>
+                      </ul>
+                    </div>
 
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="displayData()"
-                  >
-                    Submit
-                  </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="displayData()"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                  <ng-template #noroles>
+                    <p class="alert alert-danger text-centre">
+                      {{ errorMessage }}
+                    </p>
+                  </ng-template>
                 </div>
               </div>
             </div>

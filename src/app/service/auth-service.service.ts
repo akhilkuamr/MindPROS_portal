@@ -10,7 +10,9 @@ export class AuthServiceService {
   private tokenKey = 'token';
   private baseUrl = 'http://localhost:3000/fetch';
 
-  constructor(private http: HttpClient, private _router: Router) {}
+  constructor(private http: HttpClient, private _router: Router) {
+    this.getToken1();
+  }
 
   loginUser(user: any) {
     return this.http.post(this._loginUrl, user);
@@ -32,7 +34,7 @@ export class AuthServiceService {
   logoutUser() {
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem('token');
-      this._router.navigate(['/']);
+      this._router.navigate(['/login']);
       return true;
     } else {
       return false;
@@ -49,6 +51,7 @@ export class AuthServiceService {
 
   getToken1() {
     if (typeof localStorage !== 'undefined') {
+      // console.log(localStorage.getItem('user'));
       return localStorage.getItem('user');
     } else {
       return false;
