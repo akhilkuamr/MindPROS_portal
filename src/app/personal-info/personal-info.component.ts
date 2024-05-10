@@ -264,7 +264,7 @@ export class PersonalInfoComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.counter = localStorage.getItem('user');
       this.http
-        .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
+        .get(`http://3.218.140.109:3000/fetchdata?param1=${this.counter}`)
         .subscribe((res: any) => {
           this.data = res;
         });
@@ -275,7 +275,7 @@ export class PersonalInfoComponent implements OnInit {
     console.log(this.newEmployee);
     this.http
       .put(
-        `http://localhost:3000/customers/update?param1=${this.counter}`,
+        `http://3.218.140.109:3000/customers/update?param1=${this.counter}`,
         this.newEmployee
       )
       .subscribe((res: any) => {

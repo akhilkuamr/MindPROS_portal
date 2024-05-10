@@ -12,7 +12,7 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.http
-      .get('http://localhost:3000/customers')
+      .get('http://3.218.140.109:3000/customers')
       .subscribe((result: any) => {
         this.data = result;
       });

@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = 'http://localhost:3000/details'; // Replace with your backend API URL
-  private apiUrl1 = 'http://localhost:3000/fetchdata';
+  private apiUrl = 'http://3.218.140.109:3000/details'; // Replace with your backend API URL
+  private apiUrl1 = 'http://3.218.140.109:3000/fetchdata';
   userId: String;
   constructor(private http: HttpClient) {
     this.userId = '';

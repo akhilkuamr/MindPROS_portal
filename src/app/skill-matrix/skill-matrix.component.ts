@@ -39,9 +39,9 @@ export class SkillMatrixComponent implements OnInit {
 
   ngOnInit(): void {
     const sources = [
-      this.http.get('http://localhost:3000/skillmatrix'),
-      this.http.get('http://localhost:3000/roles'),
-      this.http.get('http://localhost:3000/menu'),
+      this.http.get('http://3.218.140.109:3000/skillmatrix'),
+      this.http.get('http://3.218.140.109:3000/roles'),
+      this.http.get('http://3.218.140.109:3000/menu'),
     ];
     forkJoin(sources).subscribe(
       (res) => {
@@ -88,7 +88,7 @@ export class SkillMatrixComponent implements OnInit {
       this.employees.push(newEmployeeData);
 
       this.http
-        .post('http://localhost:3000/skill', newEmployeeData)
+        .post('http://3.218.140.109:3000/skill', newEmployeeData)
         .subscribe((result: any) => {
           this.data2 = result;
         });
@@ -150,10 +150,10 @@ export class SkillMatrixComponent implements OnInit {
       item.replace(' Employee', '')
     );
     this.http
-      .post(`http://localhost:3000/update/roles?param1=${role1}`, modifiedData)
+      .post(`http://3.218.140.109:3000/update/roles?param1=${role1}`, modifiedData)
       .subscribe((result: any) => {});
     this.http
-      .post(`http://localhost:3000/update/roles?param1=${role2}`, modifiedData1)
+      .post(`http://3.218.140.109:3000/update/roles?param1=${role2}`, modifiedData1)
       .subscribe((result: any) => {});
 
     alert('Roles was updated particular user');

@@ -19,9 +19,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.counter = this._auth.getToken1();
     const sources = [
-      this.http.get(`http://localhost:3000/fetchdata?param1=${this.counter}`),
-      this.http.get('http://localhost:3000/customers'),
-      this.http.get('http://localhost:3000/roles'),
+      this.http.get(`http://3.218.140.109:3000/fetchdata?param1=${this.counter}`),
+      this.http.get('http://3.218.140.109:3000/customers'),
+      this.http.get('http://3.218.140.109:3000/roles'),
     ];
 
     forkJoin(sources).subscribe((res) => {

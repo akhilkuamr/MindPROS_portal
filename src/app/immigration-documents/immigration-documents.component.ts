@@ -38,7 +38,7 @@ export class ImmigrationDocumentsComponent implements OnInit {
   }
 
   getUploadedFiles() {
-    this.http.get('http://localhost:3000/files').subscribe((files) => {
+    this.http.get('http://3.218.140.109:3000/files').subscribe((files) => {
       this.uploadedFiles = files;
     });
   }
@@ -50,7 +50,7 @@ export class ImmigrationDocumentsComponent implements OnInit {
     });
     this.http
       .post<any>(
-        `http://localhost:3000/upload?param1=${this.counter}`,
+        `http://3.218.140.109:3000/upload?param1=${this.counter}`,
         formData
       )
       .subscribe((res) => {

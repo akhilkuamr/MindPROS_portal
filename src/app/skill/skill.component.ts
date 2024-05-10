@@ -32,18 +32,18 @@ export class SkillComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.counter = localStorage.getItem('user');
       const sub = this.http
-        .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
+        .get(`http://3.218.140.109:3000/fetchdata?param1=${this.counter}`)
         .subscribe((res: any) => {
           this.data1 = res;
           this.http
-            .get(`http://localhost:3000/skillmatrix/getdata?param1=${res._id}`)
+            .get(`http://3.218.140.109:3000/skillmatrix/getdata?param1=${res._id}`)
             .subscribe((res: any) => {
               this.data2 = res;
             });
         });
     }
     this.http
-      .get('http://localhost:3000/skillmatrix')
+      .get('http://3.218.140.109:3000/skillmatrix')
       .subscribe((result: any) => {
         this.data = result;
       });
@@ -67,7 +67,7 @@ export class SkillComponent implements OnInit {
     if (skillExists) {
       this.employees.push(newEmployeeData);
       this.http
-        .post('http://localhost:3000/skillmatrix1', newEmployeeData)
+        .post('http://3.218.140.109:3000/skillmatrix1', newEmployeeData)
         .subscribe((result: any) => {
           this.data2 = result;
         });

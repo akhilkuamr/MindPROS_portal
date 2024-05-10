@@ -9,10 +9,10 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   fetchData() {
-    return this.httpClient.get('http://localhost:3000/customers');
+    return this.httpClient.get('http://3.218.140.109:3000/customers');
   }
 
   postData(data: any) {
-    return this.httpClient.post('http://localhost:3000/customers', data);
+    return this.httpClient.post('http://3.218.140.109:3000/customers', data);
   }
 }

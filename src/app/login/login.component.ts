@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     //   localStorage.setItem('user', this.loginUserData.Email);
     //------------- this.counter = localStorage.getItem('user');
     // this.http
-    //   .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
+    //   .get(`http://3.218.140.109:3000/fetchdata?param1=${this.counter}`)
     //   .subscribe((res: any) => {
     //     console.log((this.data = res));
     //   });
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     //console.log('43');
     try {
       this.http
-        .post('http://localhost:3000/login2', this.loginUserData)
+        .post('http://3.218.140.109:3000/login2', this.loginUserData)
         .subscribe((res: any) => {
           localStorage.setItem('token', res.accessToken);
           localStorage.setItem('user', this.loginUserData.Email);

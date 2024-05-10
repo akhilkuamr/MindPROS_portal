@@ -18,7 +18,7 @@ export class SignupComponent {
       password: userForm.value.password,
     };
     this.http
-      .post('http://localhost:3000/customers', userData)
+      .post('http://3.218.140.109:3000/customers', userData)
       .subscribe((result: any) => {
         console.log(result.json);
       });

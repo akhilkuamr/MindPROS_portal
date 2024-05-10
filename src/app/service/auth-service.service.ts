@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthServiceService {
-  private _loginUrl = 'http://localhost:3000/login';
+  private _loginUrl = 'http://3.218.140.109:3000/login';
   private tokenKey = 'token';
-  private baseUrl = 'http://localhost:3000/fetch';
+  private baseUrl = 'http://3.218.140.109:3000/fetch';
 
   constructor(private http: HttpClient, private _router: Router) {
     this.getToken1();

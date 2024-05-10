@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthServicePaychexServices {
-  private _loginUrl = 'http://localhost:3000/fetch';
+  private _loginUrl = 'http://3.218.140.109:3000/fetch';
   private readonly TOKEN_KEY = 'authToken1';
   private readonly EXPIRATION_KEY = 'tokenExpiration';
 
