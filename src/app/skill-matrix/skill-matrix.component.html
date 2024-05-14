@@ -107,6 +107,11 @@
                   >
                     Menu management
                   </h1>
+                  <ng-template #noroles>
+                    <p class="alert alert-danger text-centre">
+                      {{ errorMessage }}
+                    </p>
+                  </ng-template>
                   <div *ngIf="roles.length > 0; else noroles">
                     <div style="font-family: Bablyon">
                       <ul *ngFor="let data of roles">
@@ -149,11 +154,6 @@
                       Submit
                     </button>
                   </div>
-                  <ng-template #noroles>
-                    <p class="alert alert-danger text-centre">
-                      {{ errorMessage }}
-                    </p>
-                  </ng-template>
                 </div>
               </div>
             </div>

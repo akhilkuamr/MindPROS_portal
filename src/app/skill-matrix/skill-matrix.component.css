@@ -39,17 +39,17 @@ label {
   margin-bottom: 0.5rem;
 }
 
-button {
+/* button {
   border-radius: 0;
 }
 
 button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
-}
+} */
 
 input,
-button,
+/* button, */
 textarea {
   font-family: inherit;
   font-size: inherit;
@@ -57,14 +57,14 @@ textarea {
   margin: 0;
 }
 
-button,
+/* button,
 input {
   overflow: visible;
 }
 
 button {
   text-transform: none;
-}
+} */
 
 textarea {
   overflow: auto;

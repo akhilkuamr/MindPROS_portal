@@ -45,17 +45,25 @@ export class LoginComponent implements OnInit {
     // console.log(error);
     // }
     //console.log('43');
-    try {
-      this.http
-        .post('http://localhost:3000/login2', this.loginUserData)
-        .subscribe((res: any) => {
+
+    this.http
+      .post('http://localhost:3000/login2', this.loginUserData)
+      .subscribe(
+        (res: any) => {
+          console.log(res, '52');
           localStorage.setItem('token', res.accessToken);
           localStorage.setItem('user', this.loginUserData.Email);
           this._router.navigate(['/dashboard']);
-        });
-    } catch (err: any) {
-      console.log(err, '57');
-      this.errorMessage = err;
-    }
+        },
+        (error) => {
+          if (error.status === 400) {
+            alert('Invalid credentials'); // Show alert for invalid credentials
+          } else if (error.status === 500) {
+            alert('Internal server error'); // Show alert for internal server error
+          } else {
+            alert('An error occurred, please try again later.'); // Default error message
+          }
+        }
+      );
   }
 }

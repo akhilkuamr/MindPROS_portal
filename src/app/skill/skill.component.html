@@ -81,6 +81,14 @@
                           <td>{{ employee.skill_name }}</td>
                           <td>{{ employee.YOE }}</td>
                           <td>{{ employee.rating }}</td>
+                          <td>
+                            <a
+                              class="fa fa-trash"
+                              aria-hidden="true"
+                              style="color: red"
+                              (click)="deleteItem(employee)"
+                            ></a>
+                          </td>
                         </tr>
                       </tbody>
                     </table>

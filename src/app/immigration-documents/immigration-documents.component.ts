@@ -32,7 +32,6 @@ export class ImmigrationDocumentsComponent implements OnInit {
   selectImage(event: any) {
     this.status = 'uploading';
     this.filesToUpload.push(...event.target.files);
-    this.status = 'success';
 
     this.fileUploaded = true;
   }
@@ -58,5 +57,6 @@ export class ImmigrationDocumentsComponent implements OnInit {
       });
 
     alert('Files successfully uploaded.');
+    this.status = 'success';
   }
 }

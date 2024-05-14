@@ -23,6 +23,8 @@ export class SkillComponent implements OnInit {
     rating: '',
   };
 
+  //rate = document.querySelector('.card-body') as HTMLDivElement;
+
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -31,7 +33,7 @@ export class SkillComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.counter = localStorage.getItem('user');
-      const sub = this.http
+      this.http
         .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
         .subscribe((res: any) => {
           this.data1 = res;
@@ -49,36 +51,55 @@ export class SkillComponent implements OnInit {
       });
   }
 
+  deleteItem(employee: any) {
+    const skillName = employee.skill_name;
+    const userId = this.data1._id;
+    this.http
+      .delete(
+        `http://localhost:3000/skillmatrix/delete?param1=${userId}&skillName=${skillName}`
+      )
+      .subscribe((res) => {
+        console.log('Skill deleted successfully');
+        this.data2 = this.data2.filter((item: any) => item !== employee);
+      });
+  }
+
   addEmployee() {
     const newId = this.data2.length + 1;
-    const newEmployeeData = {
-      user_id: this.data1._id,
-      id: newId,
-      skill_name: this.newEmployee.skill_name,
-      YOE: this.newEmployee.YOE,
-      rating: this.newEmployee.rating,
-    };
+    if (this.newEmployee.skill_name) {
+      const newEmployeeData = {
+        user_id: this.data1._id,
+        id: newId,
+        skill_name: this.newEmployee.skill_name,
+        YOE: this.newEmployee.YOE,
+        rating: this.newEmployee.rating,
+      };
 
-    const skillExists = !this.data2.some(
-      (item: { skill_name: string }) =>
-        item.skill_name === this.newEmployee.skill_name
-    );
+      const skillExists = !this.data2.some(
+        (item: { skill_name: string }) =>
+          item.skill_name === this.newEmployee.skill_name
+      );
 
-    if (skillExists) {
-      this.employees.push(newEmployeeData);
-      this.http
-        .post('http://localhost:3000/skillmatrix1', newEmployeeData)
-        .subscribe((result: any) => {
-          this.data2 = result;
-        });
+      if (skillExists) {
+        this.employees.push(newEmployeeData);
+        this.http
+          .post('http://localhost:3000/skillmatrix1', newEmployeeData)
+          .subscribe((result: any) => {
+            this.data2 = result;
+          });
+      } else {
+        alert('already Exists skill');
+      }
+
+      this.newEmployee = {
+        user_id: ' ',
+        id: 0,
+        skill_name: '',
+        YOE: '',
+        rating: '',
+      };
+    } else {
+      alert('Enter the Skill Name, YOE and Rating Required  ');
     }
-
-    this.newEmployee = {
-      user_id: ' ',
-      id: 0,
-      skill_name: '',
-      YOE: '',
-      rating: '',
-    };
   }
 }

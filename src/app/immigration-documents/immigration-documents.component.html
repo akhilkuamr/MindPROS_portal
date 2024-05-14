@@ -13,9 +13,7 @@
 
               <form>
                 <div class="col-md-6">
-                  <label for="formFile" class="form-label"
-                    >Passport Details *</label
-                  >
+                  <label class="form-label">Passport Details *</label>
                   <input
                     class="form-control"
                     type="file"
@@ -28,11 +26,13 @@
                     <p *ngSwitchCase="'fail'">❌ Error!</p>
                     <p *ngSwitchDefault>😶 Waiting to upload...</p>
                   </section>
+                  <div *ngIf="status === 'success'">
+                    File was Successfully uploaded
+                  </div>
                 </div>
+
                 <div class="col-md-6">
-                  <label for="formFile" class="form-label"
-                    >Driving License *</label
-                  >
+                  <label class="form-label">Driving License *</label>
                   <input
                     class="form-control"
                     type="file"
@@ -40,9 +40,7 @@
                   />
                 </div>
                 <div class="col-md-6">
-                  <label for="formFile" class="form-label"
-                    >Proof of Address *</label
-                  >
+                  <label class="form-label">Proof of Address *</label>
                   <input
                     class="form-control"
                     type="file"
@@ -50,9 +48,7 @@
                   />
                 </div>
                 <div class="col-md-6">
-                  <label for="formFile" class="form-label">
-                    H1B Documents *</label
-                  >
+                  <label class="form-label"> H1B Documents *</label>
                   <input
                     class="form-control"
                     type="file"
@@ -60,7 +56,7 @@
                   />
                 </div>
                 <div class="col-md-6">
-                  <label for="formFile" class="form-label"> Green Card</label>
+                  <label class="form-label"> Green Card</label>
                   <input
                     class="form-control"
                     type="file"

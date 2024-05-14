@@ -24,14 +24,44 @@ export class LimitWordsPipe implements PipeTransform {
 })
 export class FeedComponent implements OnInit {
   topHeadlinesData: any = [];
+  filteredData: any = [];
   newPostContent: any = [];
   isPostsTabActive: boolean = true;
   isImagesTabActive: boolean = false;
+  currentPage = 1;
+  pageSize = 10;
+  totalItems = 0;
   constructor(private api: NewapiService) {}
   ngOnInit(): void {
+    this.loadTopHeadlines();
+  }
+
+  loadTopHeadlines(): void {
     this.api.tcHeadlines().subscribe((result) => {
-      this.topHeadlinesData = result.articles;
+      this.totalItems = result.articles.length;
+      this.topHeadlinesData = result.articles
+        .filter((item: any) => item.author !== null)
+        .slice(
+          (this.currentPage - 1) * this.pageSize,
+          this.currentPage * this.pageSize
+        );
     });
+  }
+
+  nextPage(): void {
+    if (this.currentPage * this.pageSize < this.totalItems) {
+      this.currentPage++;
+      this.loadTopHeadlines();
+    }
+    document.getElementById('top').scrollIntoView();
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadTopHeadlines();
+    }
+    document.getElementById('top').scrollIntoView();
   }
 
   handleTabClick(tab: string) {

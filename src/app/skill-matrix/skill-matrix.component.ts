@@ -84,6 +84,8 @@ export class SkillMatrixComponent implements OnInit {
         item.skill_name === this.newEmployee.skill_name
     );
 
+    console.log(skillExists, '87');
+
     if (skillExists) {
       this.employees.push(newEmployeeData);
 

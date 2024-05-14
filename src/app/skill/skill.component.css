@@ -39,10 +39,6 @@ label {
   margin-bottom: 0.5rem;
 }
 
-button {
-  border-radius: 0;
-}
-
 button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
@@ -60,10 +56,6 @@ textarea {
 button,
 input {
   overflow: visible;
-}
-
-button {
-  text-transform: none;
 }
 
 textarea {
