@@ -4,10 +4,13 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-skill-matrix',
@@ -35,6 +38,9 @@ export class SkillMatrixComponent implements OnInit {
     description: '',
   };
 
+  displayedColumns: string[] = ['id', 'skill_name', 'description', 'action'];
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -49,6 +55,8 @@ export class SkillMatrixComponent implements OnInit {
           this.data2 = res[0];
           this.roles = res[1];
           this.menus = res[2];
+          this.dataSource = new MatTableDataSource<any>(this.data2);
+          this.dataSource.paginator = this.paginator;
         }
         this.onload();
       },
@@ -56,6 +64,25 @@ export class SkillMatrixComponent implements OnInit {
         this.errorMessage = error.message;
       }
     );
+  }
+  deleteRecord(record: any): void {
+    console.log(record, '69');
+    const index = this.dataSource.data.indexOf(record);
+
+    this.http
+      .delete(
+        `http://localhost:3000/skill/delete?param1=${record.id}&skillName=${record.skill_name}`
+      )
+      .subscribe(
+        (res: any) => {
+          console.log('Skill deleted successfully');
+          this.dataSource.data.splice(index, 1);
+          this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
+        },
+        (error) => {
+          console.error('Error deleting skill:', error);
+        }
+      );
   }
 
   onload() {
@@ -93,6 +120,7 @@ export class SkillMatrixComponent implements OnInit {
         .post('http://localhost:3000/skill', newEmployeeData)
         .subscribe((result: any) => {
           this.data2 = result;
+          this.dataSource = new MatTableDataSource<any>(this.data2);
         });
     } else {
       alert('already Exists skill');

@@ -45,28 +45,13 @@ import { SkillComponent } from './skill/skill.component';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { EmployeesComponent } from './employees/employees.component';
 import { PaychexComponent } from './paychex/paychex.component';
-
-const routes: Routes = [
-  // { path: 'signup', component: SignupComponent },
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  //{ path: 'signup/login', component: LoginComponent },
-  { path: 'feed', component: FeedComponent },
-  { path: 'information', component: PersonalInfoComponent },
-  { path: 'skillmatrix', component: SkillMatrixComponent },
-  { path: 'companyemail', component: CompanyEmailDashboardComponent },
-  { path: 'immigration', component: ImmigrationDocumentsComponent },
-  { path: 'skill', component: SkillComponent },
-  { path: 'employees', component: EmployeesComponent },
-  { path: 'paychex', component: PaychexComponent },
-
-  { path: 'immigration', component: ImmigrationDocumentsComponent },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [PermissionsService],
-  },
-];
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatTableModule } from '@angular/material/table';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 function MsalInstanceFactory(): IPublicClientApplication {
   const msalInstance = new PublicClientApplication({
@@ -105,14 +90,20 @@ function MsalInstanceFactory(): IPublicClientApplication {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
     FormsModule,
     SocialLoginModule,
     ReactiveFormsModule,
     TreeViewModule,
+    MatTableModule,
+    MatButton,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  // exports: [RouterModule],
+  exports: [RouterModule],
   providers: [
     provideClientHydration(),
     provideHttpClient(withFetch()),
@@ -144,6 +135,7 @@ function MsalInstanceFactory(): IPublicClientApplication {
       useFactory: MsalInstanceFactory,
     },
     MsalService,
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

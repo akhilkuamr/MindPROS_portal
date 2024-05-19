@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-employees',
@@ -8,6 +11,17 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class EmployeesComponent implements OnInit {
   data: any = [];
+  displayedColumns: string[] = [
+    'Employee_id',
+    'First_name',
+    'Role',
+    'Email',
+    'Visa_status',
+  ];
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -15,6 +29,9 @@ export class EmployeesComponent implements OnInit {
       .get('http://localhost:3000/customers')
       .subscribe((result: any) => {
         this.data = result;
+        this.dataSource = new MatTableDataSource<any>(this.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       });
   }
 }

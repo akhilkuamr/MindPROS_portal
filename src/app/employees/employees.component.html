@@ -10,26 +10,74 @@
                   <h1 style="color: #2d3091; font-family: Bablyon">
                     Employee Details
                   </h1>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Employee_Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Visa Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let foo of data; let i = index">
-                        <th scope="row">{{ i + 1 }}</th>
-                        <td>{{ foo.First_name }} {{ foo.Last_name }}</td>
-                        <td>{{ foo.Role }}</td>
-                        <td>{{ foo.Email }}</td>
-                        <td>{{ foo.Visa_status }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+                  <mat-card>
+                    <mat-card-header></mat-card-header>
+                    <mat-card-content>
+                      <table
+                        mat-table
+                        [dataSource]="dataSource"
+                        class="mat-elevation-z8"
+                      >
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="Employee_id">
+                          <th mat-header-cell *matHeaderCellDef>Employee_Id</th>
+                          <td mat-cell *matCellDef="let element; let i = index">
+                            {{ i + 1 }}
+                          </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="First_name">
+                          <th mat-header-cell *matHeaderCellDef>Name</th>
+                          <td mat-cell *matCellDef="let element" matSort>
+                            {{ element.First_name }}
+                          </td>
+                        </ng-container>
+
+                        <!-- Weight Column -->
+                        <ng-container matColumnDef="Role">
+                          <th mat-header-cell *matHeaderCellDef>Role</th>
+                          <td mat-cell *matCellDef="let element">
+                            {{ element.Role }}
+                          </td>
+                        </ng-container>
+
+                        <!-- Symbol Column -->
+                        <ng-container matColumnDef="Email">
+                          <th mat-header-cell *matHeaderCellDef>Email</th>
+                          <td mat-cell *matCellDef="let element">
+                            {{ element.Email }}
+                          </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Visa_status">
+                          <th mat-header-cell *matHeaderCellDef>Visa status</th>
+                          <td mat-cell *matCellDef="let element">
+                            {{ element.Visa_status }}
+                          </td>
+                        </ng-container>
+
+                        <tr
+                          mat-header-row
+                          *matHeaderRowDef="displayedColumns"
+                        ></tr>
+                        <tr
+                          mat-row
+                          *matRowDef="let row; columns: displayedColumns"
+                        ></tr>
+                      </table>
+                    </mat-card-content>
+                    <mat-card-footer>
+                      <mat-paginator
+                        [pageSizeOptions]="[5, 10, 20]"
+                        showFirstLastButtons
+                        aria-label="Select page of periodic elements"
+                        [length]="dataSource?.data.length"
+                      >
+                      </mat-paginator>
+                    </mat-card-footer>
+                  </mat-card>
                 </div>
               </div>
             </div>
