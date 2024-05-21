@@ -273,7 +273,7 @@ export class PersonalInfoComponent implements OnInit {
   }
 
   addEmployee() {
-    console.log(this.newEmployee);
+    //console.log(this.newEmployee);
     this.http
       .put(
         `${AppConfig.apiBaseUrl}/customers/update?param1=${this.counter}`,

@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     ];
 
     forkJoin(sources).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       if (res) {
         this.id_data = res[0];
         this.data = res[1];

@@ -21,8 +21,8 @@ export class SignupComponent {
     this.http
       .post(`${AppConfig.apiBaseUrl}/customers`, userData)
       .subscribe((result: any) => {
-        console.log(result.json);
+        //console.log(result.json);
       });
-    console.log('Data:', userData);
+    //console.log('Data:', userData);
   }
 }

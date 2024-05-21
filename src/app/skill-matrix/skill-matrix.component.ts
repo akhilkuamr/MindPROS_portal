@@ -26,6 +26,7 @@ export class SkillMatrixComponent implements OnInit {
   ];
 
   employees = EMPLOYEES;
+
   newEmployee = {
     id: 0,
     skill_name: '',
@@ -43,6 +44,7 @@ export class SkillMatrixComponent implements OnInit {
       this.http.get(`${AppConfig.apiBaseUrl}/roles`),
       this.http.get(`${AppConfig.apiBaseUrl}/menu`),
     ];
+
     forkJoin(sources).subscribe(
       (res) => {
         if (res) {
@@ -60,16 +62,13 @@ export class SkillMatrixComponent implements OnInit {
     );
   }
   deleteRecord(record: any): void {
-    console.log(record, '69');
     const index = this.dataSource.data.indexOf(record);
-
     this.http
       .delete(
         `${AppConfig.apiBaseUrl}/skill/delete?param1=${record.id}&skillName=${record.skill_name}`
       )
       .subscribe(
         (res: any) => {
-          console.log('Skill deleted successfully');
           this.dataSource.data.splice(index, 1);
           this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
         },

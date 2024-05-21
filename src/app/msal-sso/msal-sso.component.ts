@@ -24,7 +24,7 @@ export class MSALSSOComponent implements OnInit {
 
   login() {
     this.msalService.instance.loginPopup().then((response) => {
-      console.log(response);
+      //console.log(response);
       const token = response.idToken;
       this._auth.saveToken(token);
 

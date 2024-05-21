@@ -57,7 +57,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 export const AppConfig = {
-  apiBaseUrl: 'http://localhost:3000',
+  apiBaseUrl: 'https://api.e-arena.mind-pros.com',
   // Add more URLs or other configuration constants here
 };
 

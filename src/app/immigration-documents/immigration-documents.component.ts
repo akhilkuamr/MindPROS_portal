@@ -54,7 +54,7 @@ export class ImmigrationDocumentsComponent implements OnInit {
         formData
       )
       .subscribe((res) => {
-        console.log(res.filename);
+        //console.log(res.filename);
       });
 
     alert('Files successfully uploaded.');

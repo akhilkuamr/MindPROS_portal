@@ -75,7 +75,7 @@ export class FeedComponent implements OnInit {
   }
 
   addnews() {
-    console.log(this.newPostContent);
+    // console.log(this.newPostContent);
     if (
       this.newPostContent.title.trim() !== '' &&
       this.newPostContent.content.trim() !== ''

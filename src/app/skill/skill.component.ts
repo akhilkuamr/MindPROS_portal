@@ -1,9 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  ViewChild,
+} from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { isPlatformBrowser } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppConfig } from '../app.module';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-skill',
@@ -27,7 +34,7 @@ export class SkillComponent implements OnInit {
   };
   displayedColumns: string[] = ['id', 'skill_name', 'YOE', 'rating', 'action'];
   dataSource!: MatTableDataSource<any>;
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -62,6 +69,7 @@ export class SkillComponent implements OnInit {
       .subscribe((res) => {
         this.dataSource.data.splice(index, 1);
         this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
+        this.dataSource.paginator = this.paginator;
       });
   }
 
