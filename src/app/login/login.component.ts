@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../service/auth-service.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { AppConfig } from '../app.module';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
     //console.log('43');
 
     this.http
-      .post('http://localhost:3000/login2', this.loginUserData)
+      .post(`${AppConfig.apiBaseUrl}/login2`, this.loginUserData)
       .subscribe(
         (res: any) => {
           console.log(res, '52');

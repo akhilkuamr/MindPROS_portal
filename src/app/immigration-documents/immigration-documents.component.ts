@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AppConfig } from '../app.module';
 
 @Component({
   selector: 'app-immigration-documents',
@@ -37,7 +38,7 @@ export class ImmigrationDocumentsComponent implements OnInit {
   }
 
   getUploadedFiles() {
-    this.http.get('http://localhost:3000/files').subscribe((files) => {
+    this.http.get(`${AppConfig.apiBaseUrl}/files`).subscribe((files) => {
       this.uploadedFiles = files;
     });
   }
@@ -49,7 +50,7 @@ export class ImmigrationDocumentsComponent implements OnInit {
     });
     this.http
       .post<any>(
-        `http://localhost:3000/upload?param1=${this.counter}`,
+        `${AppConfig.apiBaseUrl}/upload?param1=${this.counter}`,
         formData
       )
       .subscribe((res) => {

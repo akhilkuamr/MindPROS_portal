@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { json } from 'stream/consumers';
 import { response } from 'express';
+import { AppConfig } from '../app.module';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -18,7 +19,7 @@ export class SignupComponent {
       password: userForm.value.password,
     };
     this.http
-      .post('http://localhost:3000/customers', userData)
+      .post(`${AppConfig.apiBaseUrl}/customers`, userData)
       .subscribe((result: any) => {
         console.log(result.json);
       });

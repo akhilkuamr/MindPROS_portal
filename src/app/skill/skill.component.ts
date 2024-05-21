@@ -3,6 +3,7 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { isPlatformBrowser } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
+import { AppConfig } from '../app.module';
 
 @Component({
   selector: 'app-skill',
@@ -15,6 +16,7 @@ export class SkillComponent implements OnInit {
   data1: any = {};
   data2: any = [];
   employees = EMPLOYEES;
+  private apiurl = AppConfig.apiBaseUrl;
 
   newEmployee = {
     user_id: '',
@@ -35,29 +37,27 @@ export class SkillComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.counter = localStorage.getItem('user');
       this.http
-        .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
+        .get(`${this.apiurl}/fetchdata?param1=${this.counter}`)
         .subscribe((res: any) => {
           this.data1 = res;
           this.http
-            .get(`http://localhost:3000/skillmatrix/getdata?param1=${res._id}`)
+            .get(`${this.apiurl}/skillmatrix/getdata?param1=${res._id}`)
             .subscribe((res: any) => {
               this.data2 = res;
               this.dataSource = new MatTableDataSource<any>(this.data2);
             });
         });
     }
-    this.http
-      .get('http://localhost:3000/skillmatrix')
-      .subscribe((result: any) => {
-        this.data = result;
-      });
+    this.http.get(`${this.apiurl}/skillmatrix`).subscribe((result: any) => {
+      this.data = result;
+    });
   }
 
   deleteItem(employee: any) {
     const index = this.dataSource.data.indexOf(employee);
     this.http
       .delete(
-        `http://localhost:3000/skillmatrix/delete?param1=${this.data1._id}&skillName=${employee.skill_name}`
+        `${this.apiurl}/skillmatrix/delete?param1=${this.data1._id}&skillName=${employee.skill_name}`
       )
       .subscribe((res) => {
         this.dataSource.data.splice(index, 1);
@@ -84,7 +84,7 @@ export class SkillComponent implements OnInit {
       if (skillExists) {
         this.employees.push(newEmployeeData);
         this.http
-          .post('http://localhost:3000/skillmatrix1', newEmployeeData)
+          .post(`${this.apiurl}/skillmatrix1`, newEmployeeData)
           .subscribe((result: any) => {
             this.data2 = result;
             this.dataSource = new MatTableDataSource<any>(this.data2);

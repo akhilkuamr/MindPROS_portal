@@ -2,24 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AppConfig } from '../app.module';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServiceService {
-  private _loginUrl = 'http://localhost:3000/login';
   private tokenKey = 'token';
-  private baseUrl = 'http://localhost:3000/fetch';
 
   constructor(private http: HttpClient, private _router: Router) {
     this.getToken1();
   }
 
   loginUser(user: any) {
-    return this.http.post(this._loginUrl, user);
+    return this.http.post(`${AppConfig.apiBaseUrl}/login`, user);
   }
 
   getDataByUsername(username: string): Observable<any> {
-    const url = `${this.baseUrl}?username=${username}`;
+    const url = `${AppConfig.apiBaseUrl}/fetch?username=${username}`;
     return this.http.get(url);
   }
 

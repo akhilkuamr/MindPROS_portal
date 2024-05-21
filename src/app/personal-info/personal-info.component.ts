@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthServiceService } from '../service/auth-service.service';
 import { HttpClient } from '@angular/common/http';
+import { AppConfig } from '../app.module';
 @Component({
   selector: 'app-personal-info',
   templateUrl: './personal-info.component.html',
@@ -264,7 +265,7 @@ export class PersonalInfoComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.counter = localStorage.getItem('user');
       this.http
-        .get(`http://localhost:3000/fetchdata?param1=${this.counter}`)
+        .get(`${AppConfig.apiBaseUrl}/fetchdata?param1=${this.counter}`)
         .subscribe((res: any) => {
           this.data = res;
         });
@@ -275,7 +276,7 @@ export class PersonalInfoComponent implements OnInit {
     console.log(this.newEmployee);
     this.http
       .put(
-        `http://localhost:3000/customers/update?param1=${this.counter}`,
+        `${AppConfig.apiBaseUrl}/customers/update?param1=${this.counter}`,
         this.newEmployee
       )
       .subscribe((res: any) => {

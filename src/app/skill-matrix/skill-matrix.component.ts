@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { AppConfig } from '../app.module';
 
 @Component({
   selector: 'app-skill-matrix',
@@ -38,9 +39,9 @@ export class SkillMatrixComponent implements OnInit {
 
   ngOnInit(): void {
     const sources = [
-      this.http.get('http://localhost:3000/skillmatrix'),
-      this.http.get('http://localhost:3000/roles'),
-      this.http.get('http://localhost:3000/menu'),
+      this.http.get(`${AppConfig.apiBaseUrl}/skillmatrix`),
+      this.http.get(`${AppConfig.apiBaseUrl}/roles`),
+      this.http.get(`${AppConfig.apiBaseUrl}/menu`),
     ];
     forkJoin(sources).subscribe(
       (res) => {
@@ -64,7 +65,7 @@ export class SkillMatrixComponent implements OnInit {
 
     this.http
       .delete(
-        `http://localhost:3000/skill/delete?param1=${record.id}&skillName=${record.skill_name}`
+        `${AppConfig.apiBaseUrl}/skill/delete?param1=${record.id}&skillName=${record.skill_name}`
       )
       .subscribe(
         (res: any) => {
@@ -110,7 +111,7 @@ export class SkillMatrixComponent implements OnInit {
       this.employees.push(newEmployeeData);
 
       this.http
-        .post('http://localhost:3000/skill', newEmployeeData)
+        .post('${this.apiurl}/skill', newEmployeeData)
         .subscribe((result: any) => {
           this.data2 = result;
           this.dataSource = new MatTableDataSource<any>(this.data2);
@@ -202,10 +203,16 @@ export class SkillMatrixComponent implements OnInit {
       item.replace(' Employee', '')
     );
     this.http
-      .post(`http://localhost:3000/update/roles?param1=${role1}`, modifiedData)
+      .post(
+        `${AppConfig.apiBaseUrl}/update/roles?param1=${role1}`,
+        modifiedData
+      )
       .subscribe((result: any) => {});
     this.http
-      .post(`http://localhost:3000/update/roles?param1=${role2}`, modifiedData1)
+      .post(
+        `${AppConfig.apiBaseUrl}/update/roles?param1=${role2}`,
+        modifiedData1
+      )
       .subscribe((result: any) => {});
 
     alert('Roles was updated particular user');

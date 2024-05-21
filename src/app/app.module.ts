@@ -56,6 +56,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+export const AppConfig = {
+  apiBaseUrl: 'http://localhost:3000',
+  // Add more URLs or other configuration constants here
+};
+
 function MsalInstanceFactory(): IPublicClientApplication {
   const msalInstance = new PublicClientApplication({
     auth: {

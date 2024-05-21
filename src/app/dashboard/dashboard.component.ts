@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../service/auth-service.service';
 import { forkJoin } from 'rxjs';
+import { AppConfig } from '../app.module';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,9 +20,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.counter = this._auth.getToken1();
     const sources = [
-      this.http.get(`http://localhost:3000/fetchdata?param1=${this.counter}`),
-      this.http.get('http://localhost:3000/customers'),
-      this.http.get('http://localhost:3000/roles'),
+      this.http.get(`${AppConfig.apiBaseUrl}/fetchdata?param1=${this.counter}`),
+      this.http.get(`${AppConfig.apiBaseUrl}/customers`),
+      this.http.get(`${AppConfig.apiBaseUrl}/roles`),
     ];
 
     forkJoin(sources).subscribe((res) => {

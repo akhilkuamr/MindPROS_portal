@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AppConfig } from '../app.module';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthServicePaychexServices {
-  private _loginUrl = 'http://localhost:3000/fetch';
+  private _loginUrl = `${AppConfig.apiBaseUrl}/fetch`;
   private readonly TOKEN_KEY = 'authToken1';
   private readonly EXPIRATION_KEY = 'tokenExpiration';
 
