@@ -52,6 +52,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 function MsalInstanceFactory(): IPublicClientApplication {
   const msalInstance = new PublicClientApplication({
@@ -101,6 +104,9 @@ function MsalInstanceFactory(): IPublicClientApplication {
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    MatCheckboxModule,
+    MatListModule,
+    MatGridListModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [RouterModule],

@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
@@ -130,7 +123,7 @@ export class SkillMatrixComponent implements OnInit {
   }
 
   onChange(value: string, event: any): void {
-    const isChecked = event.target.checked;
+    const isChecked = event.checked;
     if (isChecked) {
       if (!this.all_selected_values.includes(value)) {
         this.all_selected_values.push(value);
@@ -152,6 +145,35 @@ export class SkillMatrixComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  areAllMenusSelected(role: any): boolean {
+    return this.menus.every((menu: any) =>
+      this.isMenuAssigned(role.role_name, menu.menu_name)
+    );
+  }
+
+  toggleAllMenus(role: any, event: any): void {
+    const isChecked = event.checked;
+    this.menus.forEach((menu: any) => {
+      const value = `${menu.menu_name} ${role.role_name}`;
+      if (isChecked && !this.all_selected_values.includes(value)) {
+        this.all_selected_values.push(value);
+      } else if (!isChecked && this.all_selected_values.includes(value)) {
+        const index = this.all_selected_values.indexOf(value);
+        if (index !== -1) {
+          this.all_selected_values.splice(index, 1);
+        }
+      }
+    });
+    this.updateSelectedArrays();
+  }
+
+  isIndeterminate(role: any): boolean {
+    const assignedMenus = this.menus.filter((menu: any) =>
+      this.isMenuAssigned(role.role_name, menu.menu_name)
+    );
+    return assignedMenus.length > 0 && assignedMenus.length < this.menus.length;
   }
 
   updateSelectedArrays(): void {

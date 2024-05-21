@@ -68,7 +68,6 @@
                       [dataSource]="dataSource"
                       class="mat-elevation-z8"
                     >
-                      <!-- Position Column -->
                       <ng-container matColumnDef="id">
                         <th
                           mat-header-cell
@@ -81,8 +80,6 @@
                           {{ element.id }}
                         </td>
                       </ng-container>
-
-                      <!-- Name Column -->
                       <ng-container matColumnDef="skill_name">
                         <th
                           mat-header-cell
@@ -96,7 +93,6 @@
                         </td>
                       </ng-container>
 
-                      <!-- Weight Column -->
                       <ng-container matColumnDef="description">
                         <th
                           mat-header-cell
@@ -165,61 +161,55 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
-                  <h1
-                    style="
-                      color: #2d3091;
-                      font-family: Bablyon;
-                      text-align: center;
-                    "
-                  >
-                    Menu management
-                  </h1>
+                  <h1 class="menu-management-title">Menu Management</h1>
                   <ng-template #noroles>
-                    <p class="alert alert-danger text-centre">
+                    <p class="alert alert-danger text-center">
                       {{ errorMessage }}
                     </p>
                   </ng-template>
                   <div *ngIf="roles.length > 0; else noroles">
-                    <div style="font-family: Bablyon">
-                      <ul *ngFor="let data of roles">
-                        <div class="row">
-                          <li>
-                            <input type="checkbox" />{{ data.role_name }}
-                            <ul *ngFor="let data1 of menus">
-                              <li>
-                                <input
-                                  class="form-check-input me-1"
-                                  type="checkbox"
-                                  [checked]="
-                                    isMenuAssigned(
-                                      data.role_name,
-                                      data1.menu_name
-                                    )
-                                  "
-                                  (change)="
-                                    onChange(
-                                      data1.menu_name + ' ' + data.role_name,
-                                      $event
-                                    )
-                                  "
-                                  [value]="
-                                    data1.menu_name + ' ' + data.role_name
-                                  "
-                                />{{ data1.menu_name }}
-                              </li>
-                            </ul>
-                          </li>
-                        </div>
+                    <div class="roles-container">
+                      <ul *ngFor="let data of roles" class="role-list">
+                        <li>
+                          <mat-checkbox
+                            [checked]="areAllMenusSelected(data)"
+                            [indeterminate]="isIndeterminate(data)"
+                            (change)="toggleAllMenus(data, $event)"
+                            >{{ data.role_name }}</mat-checkbox
+                          >
+                          <ul class="menu-list">
+                            <li *ngFor="let data1 of menus">
+                              <mat-checkbox
+                                [checked]="
+                                  isMenuAssigned(
+                                    data.role_name,
+                                    data1.menu_name
+                                  )
+                                "
+                                (change)="
+                                  onChange(
+                                    data1.menu_name + ' ' + data.role_name,
+                                    $event
+                                  )
+                                "
+                                [value]="data1.menu_name + ' ' + data.role_name"
+                              >
+                                {{ data1.menu_name }}
+                              </mat-checkbox>
+                            </li>
+                          </ul>
+                        </li>
                       </ul>
                     </div>
-
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      (click)="displayData()"
-                    >
-                      Submit
-                    </button>
+                    <div class="text-center mt-3">
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="displayData()"
+                      >
+                        Submit
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

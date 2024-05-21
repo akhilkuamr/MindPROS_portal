@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { EMPLOYEES } from './mock-data';
 import { isPlatformBrowser } from '@angular/common';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-skill',
@@ -22,8 +23,8 @@ export class SkillComponent implements OnInit {
     YOE: '',
     rating: '',
   };
-
-  //rate = document.querySelector('.card-body') as HTMLDivElement;
+  displayedColumns: string[] = ['id', 'skill_name', 'YOE', 'rating', 'action'];
+  dataSource!: MatTableDataSource<any>;
 
   constructor(
     private http: HttpClient,
@@ -41,6 +42,7 @@ export class SkillComponent implements OnInit {
             .get(`http://localhost:3000/skillmatrix/getdata?param1=${res._id}`)
             .subscribe((res: any) => {
               this.data2 = res;
+              this.dataSource = new MatTableDataSource<any>(this.data2);
             });
         });
     }
@@ -52,15 +54,14 @@ export class SkillComponent implements OnInit {
   }
 
   deleteItem(employee: any) {
-    const skillName = employee.skill_name;
-    const userId = this.data1._id;
+    const index = this.dataSource.data.indexOf(employee);
     this.http
       .delete(
-        `http://localhost:3000/skillmatrix/delete?param1=${userId}&skillName=${skillName}`
+        `http://localhost:3000/skillmatrix/delete?param1=${this.data1._id}&skillName=${employee.skill_name}`
       )
       .subscribe((res) => {
-        console.log('Skill deleted successfully');
-        this.data2 = this.data2.filter((item: any) => item !== employee);
+        this.dataSource.data.splice(index, 1);
+        this.dataSource = new MatTableDataSource<any>(this.dataSource.data);
       });
   }
 
@@ -86,6 +87,7 @@ export class SkillComponent implements OnInit {
           .post('http://localhost:3000/skillmatrix1', newEmployeeData)
           .subscribe((result: any) => {
             this.data2 = result;
+            this.dataSource = new MatTableDataSource<any>(this.data2);
           });
       } else {
         alert('already Exists skill');
