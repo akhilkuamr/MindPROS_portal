@@ -67,6 +67,7 @@
 
                 <div class="table-container">
                   <table
+                    mat-sort
                     mat-table
                     [dataSource]="dataSource"
                     class="mat-elevation-z8"
@@ -76,6 +77,7 @@
                         mat-header-cell
                         class="custom-header"
                         *matHeaderCellDef
+                        mat-sort-header
                       >
                         Employee_Id
                       </th>
@@ -88,6 +90,7 @@
                         mat-header-cell
                         class="custom-header"
                         *matHeaderCellDef
+                        mat-sort-header
                       >
                         Name
                       </th>
@@ -101,6 +104,7 @@
                         mat-header-cell
                         class="custom-header"
                         *matHeaderCellDef
+                        mat-sort-header
                       >
                         YOE
                       </th>
@@ -114,6 +118,7 @@
                         mat-header-cell
                         class="custom-header"
                         *matHeaderCellDef
+                        mat-sort-header
                       >
                         Rating
                       </th>
@@ -126,6 +131,7 @@
                         mat-header-cell
                         class="custom-header"
                         *matHeaderCellDef
+                        mat-sort-header
                       >
                         Action
                       </th>

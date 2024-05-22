@@ -57,8 +57,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 export const AppConfig = {
-  apiBaseUrl: 'https://api.e-arena.mind-pros.com',
-  // Add more URLs or other configuration constants here
+  apiBaseUrl: 'http://localhost:3000',
 };
 
 function MsalInstanceFactory(): IPublicClientApplication {
@@ -67,7 +66,6 @@ function MsalInstanceFactory(): IPublicClientApplication {
       clientId: '7cf093ac-4845-4158-b9ee-3c3bc5f9dff9',
       authority:
         'https://login.microsoftonline.com/36b2f884-33d8-4af6-826f-434a33d002f9',
-      redirectUri: 'http://localhost:4200/dashboard',
     },
   });
   msalInstance.initialize();

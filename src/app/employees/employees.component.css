@@ -342,3 +342,6 @@ a.text-white:focus {
   font-weight: 300;
   display: block;
 }
+.custom-header {
+  font-weight: bold;
+}

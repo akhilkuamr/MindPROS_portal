@@ -338,3 +338,10 @@ a.text-white:focus {
   font-weight: 300;
   display: block;
 }
+.full-width {
+  width: 100%;
+}
+
+.col-md-6 {
+  margin-bottom: 16px;
+}

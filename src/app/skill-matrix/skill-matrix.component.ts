@@ -5,6 +5,7 @@ import { forkJoin } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { AppConfig } from '../app.module';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-skill-matrix',
@@ -36,6 +37,8 @@ export class SkillMatrixComponent implements OnInit {
   displayedColumns: string[] = ['id', 'skill_name', 'description', 'action'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class SkillMatrixComponent implements OnInit {
           this.menus = res[2];
           this.dataSource = new MatTableDataSource<any>(this.data2);
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
         this.onload();
       },

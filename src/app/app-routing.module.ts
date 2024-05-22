@@ -14,19 +14,47 @@ import { PermissionsService } from './service/auth.guard';
 
 const routes: Routes = [
   // { path: 'signup', component: SignupComponent },
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: 'DashboardComponent',
+    pathMatch: 'full',
+  },
   { path: 'login', component: LoginComponent },
   //{ path: 'signup/login', component: LoginComponent },
-  { path: 'feed', component: FeedComponent },
+  { path: 'feed', component: FeedComponent, canActivate: [PermissionsService] },
   { path: 'information', component: PersonalInfoComponent },
-  { path: 'skillmatrix', component: SkillMatrixComponent },
+  {
+    path: 'skillmatrix',
+    component: SkillMatrixComponent,
+    canActivate: [PermissionsService],
+  },
   { path: 'companyemail', component: CompanyEmailDashboardComponent },
-  { path: 'immigration', component: ImmigrationDocumentsComponent },
-  { path: 'skill', component: SkillComponent },
-  { path: 'employees', component: EmployeesComponent },
-  { path: 'paychex', component: PaychexComponent },
+  {
+    path: 'immigration',
+    component: ImmigrationDocumentsComponent,
+    canActivate: [PermissionsService],
+  },
+  {
+    path: 'skill',
+    component: SkillComponent,
+    canActivate: [PermissionsService],
+  },
+  {
+    path: 'employees',
+    component: EmployeesComponent,
+    canActivate: [PermissionsService],
+  },
+  {
+    path: 'paychex',
+    component: PaychexComponent,
+    canActivate: [PermissionsService],
+  },
 
-  { path: 'immigration', component: ImmigrationDocumentsComponent },
+  {
+    path: 'immigration',
+    component: ImmigrationDocumentsComponent,
+    canActivate: [PermissionsService],
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,

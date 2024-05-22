@@ -6,10 +6,6 @@ body {
   font-size: 0.8rem;
 }
 
-.gedf-wrapper {
-  margin-top: 0.97rem;
-}
-
 @media (min-width: 992px) {
   .gedf-main {
     padding-left: 4rem;
@@ -24,4 +20,42 @@ body {
 .dropdown-toggle::after {
   content: none;
   display: none;
+}
+.gedf-wrapper {
+  margin-top: 20px;
+}
+
+.gedf-main {
+  margin: 0 auto;
+  float: none;
+  margin-top: 15px;
+}
+
+.gedf-card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+.custom-file-label::after {
+  content: "Browse";
+}
+
+.btn-toolbar .btn {
+  margin-right: 10px;
+}
+
+.pagination {
+  margin-top: 20px;
 }

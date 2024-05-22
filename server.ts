@@ -52,10 +52,7 @@ function run(): void {
   // Start up the Node server
   const server = app();
   server.listen(port, () => {
-    console.log(
-      `Node Express server listening on https://api.e-arena.mind-pros.com`,
-      56
-    );
+    console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
 
